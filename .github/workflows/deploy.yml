@@ -18,6 +18,9 @@ jobs:
         username: ${{secrets.SSH_USER1}}
         key: ${{secrets.SSH_PRIVATE_KEY1}}
         script: |
+          if [ ! -d ~/xray-config ]; then
+            git clone https://github.com/flozzzz/xray-deploy ~/xray-config
+          fi
           cd ~/xray-config
           git pull
           export UUID1="${{ secrets.SERVER1_UUID1 }}"
@@ -41,6 +44,9 @@ jobs:
         username: ${{secrets.SSH_USER2}}
         key: ${{secrets.SSH_PRIVATE_KEY2}}
         script: |
+          if [ ! -d ~/xray-config ]; then
+            git clone https://github.com/flozzzz/xray-deploy ~/xray-config
+          fi
           cd ~/xray-config
           git pull
           export UUID1="${{ secrets.SERVER2_UUID1 }}"
