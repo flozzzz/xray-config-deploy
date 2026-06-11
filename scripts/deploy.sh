@@ -1,5 +1,5 @@
 SERVER=$1
-envsubst < config/config.${SERVER}.json.template > /etc/xray/config.json
+envsubst < config/config.${SERVER}.json.template > /usr/local/etc/xray/config.json
 
 
 systemctl restart xray
