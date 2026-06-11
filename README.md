@@ -5,9 +5,9 @@ Automated deployment of [Xray-core](https://github.com/XTLS/Xray-core) configura
 ## How it works
 
 On every push to `main`, GitHub Actions connects via SSH to each server and applies the new config. If xray fails to start after deployment, it automatically rolls back to the backup.
-
 ## Structure
 
+```
 config/
   config.server1.json.template  — config template for server 1
   config.server2.json.template  — config template for server 2
@@ -15,6 +15,7 @@ scripts/
   deploy.sh                     — deploy script with rollback
 .github/workflows/
   deploy.yml                    — CI/CD pipeline
+```
 
 ## Setup
 
