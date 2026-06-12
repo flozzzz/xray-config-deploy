@@ -22,6 +22,7 @@ jobs:
             git clone https://github.com/flozzzz/xray-deploy ~/xray-config
           fi
           cd ~/xray-config
+          chmod +x ~/xray-config/scripts/deploy.sh
           git pull
           export UUID1="${{ secrets.SERVER1_UUID1 }}"
           export UUID2="${{ secrets.SERVER1_UUID2 }}"
@@ -48,6 +49,7 @@ jobs:
             git clone https://github.com/flozzzz/xray-deploy ~/xray-config
           fi
           cd ~/xray-config
+          chmod +x ~/xray-config/scripts/deploy.sh
           git pull
           export UUID1="${{ secrets.SERVER2_UUID1 }}"
           export UUID2="${{ secrets.SERVER2_UUID2 }}"

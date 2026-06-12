@@ -33,7 +33,7 @@
         "realitySettings": {
           "dest": "www.microsoft.com:443",
           "serverNames": [
-	  "www.microsoft.com",
+	   "www.microsoft.com",
            "vk.com",
            "www.ozon.ru",
            "www.wikipedia.org"
