@@ -9,7 +9,7 @@ jobs:
   deploy-server1:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: deploy
       uses: appleboy/ssh-action@v1.0.0
@@ -36,7 +36,7 @@ jobs:
   deploy-server2:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: deploy
       uses: appleboy/ssh-action@v1.0.0
