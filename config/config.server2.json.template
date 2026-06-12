@@ -34,7 +34,7 @@
           "dest": "www.microsoft.com:443",
           "serverNames": [
 	   "www.microsoft.com",
-           "vk.com",
+           "vk.ru",
            "www.ozon.ru",
            "www.wikipedia.org"
           ],
