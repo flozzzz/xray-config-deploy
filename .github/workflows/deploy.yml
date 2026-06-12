@@ -9,10 +9,10 @@ jobs:
   deploy-server1:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6.0.3
 
     - name: deploy
-      uses: appleboy/ssh-action@v1.0.0
+      uses: appleboy/ssh-action@v1.2.5
       with:
         host: ${{secrets.SSH_HOST1}}
         username: ${{secrets.SSH_USER1}}
@@ -36,10 +36,10 @@ jobs:
   deploy-server2:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6.0.3
 
     - name: deploy
-      uses: appleboy/ssh-action@v1.0.0
+      uses: appleboy/ssh-action@v1.2.5
       with:
         host: ${{secrets.SSH_HOST2}}
         username: ${{secrets.SSH_USER2}}
