@@ -33,8 +33,7 @@
           ],
           "privateKey": "${PRIVATE_KEY}",
           "shortIds": [
-            "${SHORTIDS1}",
-            "${SHORTIDS2}"
+            "${SHORTIDS1}"
           ]
         }
       },
