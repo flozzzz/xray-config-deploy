@@ -3,59 +3,65 @@ name: Deploy
 on:
   push:
     branches:
-     - main
+      - main
 
 jobs:
   deploy-server1:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6.0.3
+      - name: deploy
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SSH_HOST1 }}
+          username: ${{ secrets.SSH_USER1 }}
+          key: ${{ secrets.SSH_PRIVATE_KEY1 }}
+          script: |
+            set -e
 
-    - name: deploy
-      uses: appleboy/ssh-action@v1.2.5
-      with:
-        host: ${{secrets.SSH_HOST1}}
-        username: ${{secrets.SSH_USER1}}
-        key: ${{secrets.SSH_PRIVATE_KEY1}}
-        script: |
-          if [ ! -d ~/xray-config ]; then
-            git clone https://github.com/flozzzz/xray-deploy ~/xray-config
-          fi
-          cd ~/xray-config
-          chmod +x ~/xray-config/scripts/deploy.sh
-          git pull
-          export UUID1="${{ secrets.SERVER1_UUID1 }}"
-          export UUID2="${{ secrets.SERVER1_UUID2 }}"
-          export UUID3="${{ secrets.SERVER1_UUID3 }}"
-          export PRIVATE_KEY="${{ secrets.SERVER1_PRIVATE_KEY }}"
-          export SHORTIDS1="${{ secrets.SERVER1_SHORTIDS1 }}"
-          export SHORTIDS2="${{ secrets.SERVER1_SHORTIDS2 }}"
-          cp /usr/local/etc/xray/config.json ~/xray-config/config.json.backup
-          ./scripts/deploy.sh server1
+            REPO_DIR="$HOME/xray-config-deploy"
+
+            if [ ! -d "$REPO_DIR/.git" ]; then
+              git clone https://github.com/flozzzz/xray-config-deploy "$REPO_DIR"
+            fi
+
+            cd "$REPO_DIR"
+            git pull --ff-only
+
+            export UUID1="${{ secrets.SERVER1_UUID1 }}"
+            export UUID2="${{ secrets.SERVER1_UUID2 }}"
+            export UUID3="${{ secrets.SERVER1_UUID3 }}"
+            export PRIVATE_KEY="${{ secrets.SERVER1_PRIVATE_KEY }}"
+            export SHORTIDS1="${{ secrets.SERVER1_SHORTIDS1 }}"
+            export SHORTIDS2="${{ secrets.SERVER1_SHORTIDS2 }}"
+
+            ./scripts/deploy.sh server1
 
   deploy-server2:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6.0.3
+      - name: deploy
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SSH_HOST2 }}
+          username: ${{ secrets.SSH_USER2 }}
+          key: ${{ secrets.SSH_PRIVATE_KEY2 }}
+          script: |
+            set -e
 
-    - name: deploy
-      uses: appleboy/ssh-action@v1.2.5
-      with:
-        host: ${{secrets.SSH_HOST2}}
-        username: ${{secrets.SSH_USER2}}
-        key: ${{secrets.SSH_PRIVATE_KEY2}}
-        script: |
-          if [ ! -d ~/xray-config ]; then
-            git clone https://github.com/flozzzz/xray-deploy ~/xray-config
-          fi
-          cd ~/xray-config
-          chmod +x ~/xray-config/scripts/deploy.sh
-          git pull
-          export UUID1="${{ secrets.SERVER2_UUID1 }}"
-          export UUID2="${{ secrets.SERVER2_UUID2 }}"
-          export UUID3="${{ secrets.SERVER2_UUID3 }}"
-          export UUID4="${{ secrets.SERVER2_UUID4 }}"
-          export PRIVATE_KEY="${{ secrets.SERVER2_PRIVATE_KEY }}"
-          export SHORTIDS1="${{ secrets.SERVER2_SHORTIDS1 }}"
-          cp /usr/local/etc/xray/config.json ~/xray-config/config.json.backup
-          ./scripts/deploy.sh server2
+            REPO_DIR="$HOME/xray-config-deploy"
+
+            if [ ! -d "$REPO_DIR/.git" ]; then
+              git clone https://github.com/flozzzz/xray-config-deploy "$REPO_DIR"
+            fi
+
+            cd "$REPO_DIR"
+            git pull --ff-only
+
+            export UUID1="${{ secrets.SERVER2_UUID1 }}"
+            export UUID2="${{ secrets.SERVER2_UUID2 }}"
+            export UUID3="${{ secrets.SERVER2_UUID3 }}"
+            export UUID4="${{ secrets.SERVER2_UUID4 }}"
+            export PRIVATE_KEY="${{ secrets.SERVER2_PRIVATE_KEY }}"
+            export SHORTIDS1="${{ secrets.SERVER2_SHORTIDS1 }}"
+
+            ./scripts/deploy.sh server2
