@@ -26,10 +26,9 @@
         "security": "reality",
         "realitySettings": {
           "show": false,
-          "dest": "www.microsoft.com:443",
+          "dest": "www.ozon.ru:443",
           "serverNames": [
-            "www.microsoft.com",
-            "microsoft.com"
+            "www.ozon.ru"
           ],
           "privateKey": "${PRIVATE_KEY}",
           "shortIds": [
