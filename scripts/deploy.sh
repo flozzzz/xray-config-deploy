@@ -12,7 +12,7 @@ XRay_CONFIG_DIR="${XRay_CONFIG_DIR:-/usr/local/etc/xray}"
 CURRENT_CONFIG="$XRay_CONFIG_DIR/config.json"
 BACKUP_CONFIG="$REPO_DIR/config.json.backup"
 TEMPLATE="$REPO_DIR/config/config.${SERVER}.json.template"
-TMP_CONFIG="$(mktemp)"
+TMP_CONFIG="$(mktemp --suffix=.json)"
 
 cleanup() {
   rm -f "$TMP_CONFIG"
