@@ -9,9 +9,9 @@
       "protocol": "vless",
       "settings": {
         "clients": [
-          { "id": "${SERVER1_UUID1}" },
-          { "id": "${SERVER1_UUID2}" },
-          { "id": "${SERVER1_UUID3}" }
+          { "id": "${UUID1}" },
+          { "id": "${UUID2}" },
+          { "id": "${UUID3}" }
         ],
         "decryption": "none"
       },
@@ -26,8 +26,8 @@
           "show": false,
           "dest": "www.microsoft.com:443",
           "serverNames": ["www.microsoft.com"],
-          "privateKey": "${SERVER1_PRIVATE_KEY}",
-          "shortIds": ["${SERVER1_SHORTIDS1}", "${SERVER1_SHORTIDS2}"]
+          "privateKey": "${PRIVATE_KEY}",
+          "shortIds": ["${SHORTIDS1}", "${SHORTIDS2}"]
         }
       },
       "sniffing": {
@@ -38,13 +38,31 @@
     }
   ],
   "outbounds": [
-    { "tag": "direct", "protocol": "freedom", "settings": { "domainStrategy": "UseIPv4" } },
-    { "tag": "block", "protocol": "blackhole", "settings": { "response": { "type": "http" } } }
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      }
+    }
   ],
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
-      { "type": "field", "ip": ["geoip:private"], "outboundTag": "block" }
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "block"
+      }
     ]
   }
 }
