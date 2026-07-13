@@ -29,7 +29,6 @@ fi
 : "${UUID3:?UUID3 is required}"
 : "${PRIVATE_KEY:?PRIVATE_KEY is required}"
 : "${SHORTIDS1:?SHORTIDS1 is required}"
-: "${PATH_NAME:?PATH_NAME is required}"
 
 if [[ -n "${UUID4:-}" ]]; then
   :
@@ -39,7 +38,7 @@ if [[ -f "$CURRENT_CONFIG" ]]; then
   cp "$CURRENT_CONFIG" "$BACKUP_CONFIG"
 fi
 
-envsubst '$UUID1 $UUID2 $UUID3 $UUID4 $PRIVATE_KEY $SHORTIDS1 $SHORTIDS2 $PATH_NAME' \
+envsubst '$UUID1 $UUID2 $UUID3 $UUID4 $PRIVATE_KEY $SHORTIDS1 $SHORTIDS2 $SERVER1_PATH' \
   < "$TEMPLATE" > "$TMP_CONFIG"
 
 cp "$TMP_CONFIG" "$CURRENT_CONFIG"
