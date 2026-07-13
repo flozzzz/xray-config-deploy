@@ -52,11 +52,17 @@ systemctl restart xray
 sleep 3
 
 if ! systemctl is-active --quiet xray; then
-  echo "xray down, rolling back" >&2
+  echo "xray failed to start"
+  systemctl status xray --no-pager -l || true
+  journalctl -u xray -n 50 --no-pager || true
+
+  echo "rolling back..."
+
   if [[ -f "$BACKUP_CONFIG" ]]; then
     cp "$BACKUP_CONFIG" "$CURRENT_CONFIG"
     systemctl restart xray || true
   fi
+
   exit 1
 fi
 
