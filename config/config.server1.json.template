@@ -9,23 +9,19 @@
       "protocol": "vless",
       "settings": {
         "clients": [
-          { "id": "${UUID1}" },
-          { "id": "${UUID2}" },
-          { "id": "${UUID3}" }
+          { "id": "${UUID1}", "flow": "xtls-rprx-vision" },
+          { "id": "${UUID2}", "flow": "xtls-rprx-vision" },
+          { "id": "${UUID3}", "flow": "xtls-rprx-vision" }
         ],
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "xhttp",
-        "xhttpSettings": {
-          "path": "/${SERVER1_PATH}",
-          "mode": "stream-one"
-        },
+        "network": "tcp",
         "security": "reality",
         "realitySettings": {
           "show": false,
-          "dest": "www.microsoft.com:443",
-          "serverNames": ["www.microsoft.com"],
+          "dest": "gateway.icloud.com:443",
+          "serverNames": ["gateway.icloud.com"],
           "privateKey": "${PRIVATE_KEY}",
           "shortIds": ["${SHORTIDS1}", "${SHORTIDS2}"]
         }

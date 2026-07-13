@@ -32,7 +32,6 @@ fi
 
 if [[ "$SERVER" == "server1" ]]; then
   : "${SHORTIDS2:?SHORTIDS2 is required for server1}"
-  : "${SERVER1_PATH:?SERVER1_PATH is required for server1}"
 fi
 
 if [[ "$SERVER" == "server2" ]]; then
@@ -44,7 +43,7 @@ if [[ -f "$CURRENT_CONFIG" ]]; then
 fi
 
 if [[ "$SERVER" == "server1" ]]; then
-  envsubst '$UUID1 $UUID2 $UUID3 $PRIVATE_KEY $SHORTIDS1 $SHORTIDS2 $SERVER1_PATH' \
+  envsubst '$UUID1 $UUID2 $UUID3 $PRIVATE_KEY $SHORTIDS1 $SHORTIDS2' \
     < "$TEMPLATE" > "$TMP_CONFIG"
 else
   envsubst '$UUID1 $UUID2 $UUID3 $UUID4 $PRIVATE_KEY $SHORTIDS1' \
