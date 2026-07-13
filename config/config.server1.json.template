@@ -18,7 +18,7 @@
       "streamSettings": {
         "network": "xhttp",
         "xhttpSettings": {
-          "path": "/${PATH_NAME}",
+          "path": "/${SERVER1_PATH}",
           "mode": "stream-one"
         },
         "security": "reality",
