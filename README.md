@@ -31,3 +31,4 @@ Add the following GitHub Secrets:
 | SERVER1/2_PRIVATE_KEY | Reality privateKey |
 | SERVER1_SHORTIDS1/2 | ShortIDs for server 1 |
 | SERVER2_SHORTIDS1 | ShortID for server 2 |
+| SERVER1_PATH | XHTTP path for server 1 |

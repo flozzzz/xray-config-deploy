@@ -30,8 +30,13 @@ fi
 : "${PRIVATE_KEY:?PRIVATE_KEY is required}"
 : "${SHORTIDS1:?SHORTIDS1 is required}"
 
-if [[ -n "${UUID4:-}" ]]; then
-  :
+if [[ "$SERVER" == "server1" ]]; then
+  : "${SHORTIDS2:?SHORTIDS2 is required for server1}"
+  : "${SERVER1_PATH:?SERVER1_PATH is required for server1}"
+fi
+
+if [[ "$SERVER" == "server2" ]]; then
+  : "${UUID4:?UUID4 is required for server2}"
 fi
 
 if [[ -f "$CURRENT_CONFIG" ]]; then
@@ -44,6 +49,14 @@ if [[ "$SERVER" == "server1" ]]; then
 else
   envsubst '$UUID1 $UUID2 $UUID3 $UUID4 $PRIVATE_KEY $SHORTIDS1' \
     < "$TEMPLATE" > "$TMP_CONFIG"
+fi
+
+if command -v xray &>/dev/null; then
+  if ! xray run -test -config "$TMP_CONFIG" 2>&1; then
+    echo "Config validation failed!" >&2
+    exit 1
+  fi
+  echo "Config validation passed"
 fi
 
 cp "$TMP_CONFIG" "$CURRENT_CONFIG"
