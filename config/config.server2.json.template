@@ -26,9 +26,9 @@
         "security": "reality",
         "realitySettings": {
           "show": false,
-          "dest": "www.ozon.ru:443",
+          "dest": "gateway.icloud.com:443",
           "serverNames": [
-            "www.ozon.ru"
+            "gateway.icloud.com"
           ],
           "privateKey": "${PRIVATE_KEY}",
           "shortIds": [

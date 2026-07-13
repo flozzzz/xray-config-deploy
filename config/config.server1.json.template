@@ -1,12 +1,7 @@
 {
-  "log": {
-    "loglevel": "error"
-  },
+  "log": { "loglevel": "error" },
   "dns": {
-    "servers": [
-      "https://1.1.1.1/dns-query",
-      "8.8.8.8"
-    ]
+    "servers": ["https://1.1.1.1/dns-query", "8.8.8.8"]
   },
   "inbounds": [
     {
@@ -14,26 +9,25 @@
       "protocol": "vless",
       "settings": {
         "clients": [
-          { "id": "${UUID1}", "flow": "xtls-rprx-vision" },
-          { "id": "${UUID2}", "flow": "xtls-rprx-vision" },
-          { "id": "${UUID3}", "flow": "xtls-rprx-vision" }
+          { "id": "${SERVER1_UUID1}" },
+          { "id": "${SERVER1_UUID2}" },
+          { "id": "${SERVER1_UUID3}" }
         ],
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "tcp",
+        "network": "xhttp",
+        "xhttpSettings": {
+          "path": "/${SERVER1_PATH}",
+          "mode": "stream-one"
+        },
         "security": "reality",
         "realitySettings": {
           "show": false,
-          "dest": "gateway.icloud.com:443",
-          "serverNames": [
-            "gateway.icloud.com"
-          ],
-          "privateKey": "${PRIVATE_KEY}",
-          "shortIds": [
-            "${SHORTIDS1}",
-            "${SHORTIDS2}"
-          ]
+          "dest": "www.microsoft.com:443",
+          "serverNames": ["www.microsoft.com"],
+          "privateKey": "${SERVER1_PRIVATE_KEY}",
+          "shortIds": ["${SERVER1_SHORTIDS1}", "${SERVER1_SHORTIDS2}"]
         }
       },
       "sniffing": {
@@ -44,29 +38,13 @@
     }
   ],
   "outbounds": [
-    {
-      "tag": "direct",
-      "protocol": "freedom",
-      "settings": {
-        "domainStrategy": "UseIPv4"
-      }
-    },
-    {
-      "tag": "block",
-      "protocol": "blackhole",
-      "settings": {
-        "response": { "type": "http" }
-      }
-    }
+    { "tag": "direct", "protocol": "freedom", "settings": { "domainStrategy": "UseIPv4" } },
+    { "tag": "block", "protocol": "blackhole", "settings": { "response": { "type": "http" } } }
   ],
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
-      {
-        "type": "field",
-        "ip": ["geoip:private"],
-        "outboundTag": "block"
-      }
+      { "type": "field", "ip": ["geoip:private"], "outboundTag": "block" }
     ]
   }
 }
